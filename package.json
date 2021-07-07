@@ -1,0 +1,28 @@
+{
+  "name": "yarosrak-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@bitbucket.org:metsawyr/yarosrak-bot.git",
+  "author": "Mykyta Radetskyi <metsawyr@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf ./dist/* && tsc -p ./tsconfig.json && tscpaths -p ./tsconfig.json -s ./src -o ./dist",
+    "start": "node ./dist/index.js",
+    "postinstall": "yarn build"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.6.0",
+    "telegraf": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.0.0",
+    "@types/pg": "^8.6.0",
+    "dotenv": "^10.0.0",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "tscpaths": "^0.0.9",
+    "typescript": "^4.3.5"
+  }
+}
