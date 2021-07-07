@@ -31,7 +31,11 @@ export const createTelegramBot = (
     }
 
     await Promise.all(
-      document.chats.map(chatId => telegraf.telegram.sendMessage(chatId, message)),
+      document.chats.map(chatId =>
+        telegraf.telegram.sendMessage(chatId, message, {
+          disable_web_page_preview: false,
+        }),
+      ),
     )
   }
 
