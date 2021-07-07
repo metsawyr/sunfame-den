@@ -1,0 +1,1 @@
+export {createTwitchFetcher} from './fetcher'

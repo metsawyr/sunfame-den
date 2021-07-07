@@ -1,8 +1,7 @@
 {
-  "name": "yarosrak-bot",
+  "name": "sunfame-den",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@bitbucket.org:metsawyr/yarosrak-bot.git",
   "author": "Mykyta Radetskyi <metsawyr@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -11,6 +10,8 @@
     "postinstall": "yarn build"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "pg": "^8.6.0",
     "telegraf": "^4.4.0"

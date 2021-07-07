@@ -1,8 +1,9 @@
 import {Pool} from 'pg'
 import config from '~/config'
-import {createTelegramBot} from '~/bot'
+import {createTelegramBot} from '~/telegram'
 import {createCollection} from '~/collection'
 import {ensureEnvironment} from '~/environment'
+import {createTwitchFetcher} from './twitch'
 
 export default async () => {
   const db = new Pool({
@@ -16,11 +17,23 @@ export default async () => {
   await ensureEnvironment(db)
   const collection = createCollection(db)
 
-  const yarosrak = createTelegramBot(config, collection)
-  yarosrak.bootstrap()
-  await yarosrak.start()
+  const telegramBot = createTelegramBot(config, collection)
+  telegramBot.bootstrap()
+
+  await telegramBot.start()
+
+  const twitchFetcher = createTwitchFetcher(config, collection)
+  twitchFetcher.on('start', stream => {
+    telegramBot.notifyStreamStarted(stream)
+  })
+  twitchFetcher.on('end', stats => {
+    telegramBot.notifyStreamEnded(stats)
+  })
+
+  twitchFetcher.start()
 
   process.on('SIGTERM', () => {
-    yarosrak.stop()
+    telegramBot.stop()
+    twitchFetcher.stop()
   })
 }

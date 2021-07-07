@@ -16,7 +16,14 @@ export type TelegramDocument = {
 }
 
 export type TwitchDocument = {
+  auth: {
+    accessToken: string
+    expiresAt: string
+  } | null
   status: 'online' | 'offline'
+  stats: {
+    lastStreamMaxViewers?: number
+  }
 }
 
 export const createCollection = (db: Pool): ApplicationCollection => {

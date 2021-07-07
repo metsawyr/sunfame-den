@@ -1,13 +1,18 @@
 import {Telegraf} from 'telegraf'
 import {ApplicationConfig} from '~/config'
-import {ApplicationCollection} from '~/collection'
+import {ApplicationCollection, TwitchDocument} from '~/collection'
 import {wireHandlers} from './handlers'
+import {TwitchStreamInfo} from '~/twitch/fetcher'
+import {createStreamStartedSender} from './messages/streamStarted'
+import {createStreamEndedSender} from './messages/streamEnded'
 
 export type TelegramBot = {
   bootstrap: () => void
   start: () => Promise<void>
   stop: () => Promise<void>
   sendMessage: (message: string) => Promise<void>
+  notifyStreamStarted: (stream: TwitchStreamInfo) => Promise<void>
+  notifyStreamEnded: (stats: TwitchDocument['stats']) => Promise<void>
 }
 
 export const createTelegramBot = (
@@ -45,5 +50,7 @@ export const createTelegramBot = (
     start,
     stop,
     sendMessage,
+    notifyStreamStarted: createStreamStartedSender(config, sendMessage),
+    notifyStreamEnded: createStreamEndedSender(config, sendMessage),
   }
 }
