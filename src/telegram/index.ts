@@ -19,7 +19,9 @@ export const createTelegramBot = (
   config: ApplicationConfig,
   collection: ApplicationCollection,
 ): TelegramBot => {
-  const telegraf = new Telegraf(config.telegramApiKey)
+  const telegraf = new Telegraf(config.telegramApiKey, {
+    telegram: {webhookReply: false},
+  })
 
   const sendMessage = async (message: string) => {
     const document = await collection.telegram.load()

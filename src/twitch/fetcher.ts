@@ -12,7 +12,7 @@ export const createTwitchFetcher = (
   config: ApplicationConfig,
   collection: ApplicationCollection,
 ): TwitchFetcher => {
-  const emitter = Object.create(EventEmitter)
+  const emitter = Object.create(new EventEmitter())
   const fetchInterval = Number(config.twitchChannelFetchInterval) * 1000
   let shouldStop = false
 
@@ -67,7 +67,7 @@ async function runFetchRoutine(
         lastStreamMaxViewers: 0,
       },
     })
-    emitter.emit('on', stream)
+    emitter.emit('start', stream)
   } else if (stream) {
     if (
       !document.stats.lastStreamMaxViewers ||

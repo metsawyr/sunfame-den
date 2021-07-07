@@ -5,6 +5,5 @@ export const createStreamEndedSender =
   (_config: ApplicationConfig, sendMessage: (message: string) => Promise<void>) =>
   (stats: TwitchDocument['stats']) =>
     sendMessage(`\
-Ярик отрубил.\n\
-На стриме было максимум ${stats.lastStreamMaxViewers!} покупателей wraith band'ов\
-`)
+Ярик отрубил 😥
+На стриме было максимум ${stats.lastStreamMaxViewers!} покупателей wraith band'ов`)
