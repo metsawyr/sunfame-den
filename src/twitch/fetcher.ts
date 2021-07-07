@@ -57,7 +57,7 @@ async function runFetchRoutine(
 
   if (!stream && document.status === 'online') {
     await collection.twitch.update({...document, status: 'offline'})
-    emitter.emit('end', {stats: document.stats})
+    emitter.emit('end', document.stats)
   } else if (stream && document.status === 'offline') {
     await collection.twitch.update({
       ...document,
