@@ -6,4 +6,4 @@ export const createStreamEndedSender =
   (stats: TwitchDocument['stats']) =>
     sendMessage(`\
 Ярик отрубил 😥
-На стриме было максимум ${stats.lastStreamMaxViewers!} покупателей wraith band'ов`)
+Пиковое количество зрителей на стриме - ${stats.lastStreamMaxViewers!}`)
