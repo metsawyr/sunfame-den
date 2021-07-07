@@ -99,7 +99,7 @@ async function getAccessToken(config: ApplicationConfig) {
 
   return {
     accessToken: data.access_token,
-    expiresAt: now.toUTCString(),
+    expiresAt: now.toISOString(),
   }
 }
 
