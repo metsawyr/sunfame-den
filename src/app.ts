@@ -1,5 +1,6 @@
 import {Pool} from 'pg'
 import config from '~/config'
+import {createApi} from '~/http'
 import {createTelegramBot} from '~/telegram'
 import {createCollection} from '~/collection'
 import {ensureEnvironment} from '~/environment'
@@ -19,7 +20,6 @@ export default async () => {
 
   const telegramBot = createTelegramBot(config, collection)
   telegramBot.bootstrap()
-
   await telegramBot.start()
 
   const twitchFetcher = createTwitchFetcher(config, collection)
@@ -29,8 +29,11 @@ export default async () => {
   twitchFetcher.on('end', stats => {
     telegramBot.notifyStreamEnded(stats)
   })
-
   twitchFetcher.start()
+
+  const api = createApi(config)
+  api.bootstrap()
+  api.start()
 
   process.on('SIGTERM', () => {
     telegramBot.stop()
