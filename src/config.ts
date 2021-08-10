@@ -1,6 +1,7 @@
 export type ApplicationConfig = {
   port: string
   databaseUrl: string
+  databaseSchema: string
   telegramApiKey: string
   telegramBotUsername: string
   twitchChannelFetchInterval: string
@@ -14,6 +15,7 @@ export default (() => {
   const keys: Array<keyof ApplicationConfig> = [
     'port',
     'databaseUrl',
+    'databaseSchema',
     'telegramApiKey',
     'telegramBotUsername',
     'twitchChannelFetchInterval',
